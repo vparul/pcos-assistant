@@ -1,10 +1,15 @@
-import { ArrowRight, Heart, Sparkles } from "lucide-react";
+import { ArrowRight, Heart, Shield, Sparkles, TrendingUp } from "lucide-react";
 import Button from "../../Button";
-import { BUTTON_SIZE, BUTTON_TYPES, ICON_PLACEMENT } from "../../../constants/button";
+import {
+  BUTTON_SIZE,
+  BUTTON_TYPES,
+  ICON_PLACEMENT,
+} from "../../../constants/button";
+import Card from "../../Card";
 
 const Home = () => {
   return (
-    <>
+    <div className="flex flex-col max-w-[90vw] items-center">
       <div className="bg-blue-100 rounded-2xl p-4 m-5">
         <Heart className="h-10 w-10 text-blue-600" />
       </div>
@@ -27,7 +32,7 @@ const Home = () => {
           size={BUTTON_SIZE.MEDIUM}
           onClick={() => {}}
         />
-         <Button
+        <Button
           title="Try AI Diet Assistant"
           icon={Sparkles}
           iconPlacement={ICON_PLACEMENT.LEFT}
@@ -36,7 +41,38 @@ const Home = () => {
           onClick={() => {}}
         />
       </div>
-    </>
+      <div className="flex max-w-3xl mx-auto mt-10 gap-6">
+        <Card
+          heading="Risk Assessment"
+          subHeading="Comprehensive questionnaire to evaluate your PCOS risk factors and symptoms"
+          icon={
+            <div className="p-2 bg-blue-100 border-blue-50 border-1 rounded-lg mb-4">
+              <Shield className="w-5 h-5 text-blue-600" />
+            </div>
+          }
+        />
+
+        <Card
+          heading="Progress Tracking"
+          subHeading="Monitor your symptoms, lifestyle changes, and health improvements over time"
+          icon={
+            <div className="p-2 bg-green-100 border-green-50 border-1 rounded-lg mb-4">
+            <TrendingUp className="w-5 h-5 text-green-600" />
+          </div>
+          }
+        />
+
+        <Card
+          heading="AI-Powered Care"
+          subHeading="Receive AI-generated diet plans and personalized recommendations for optimal health"
+          icon={
+            <div className="p-2 bg-orange-100 border-orange-50 border-1 rounded-lg mb-4">
+            <Sparkles className="w-5 h-5 text-orange-600" />
+            </div>
+          }
+        />
+      </div>
+    </div>
   );
 };
 
