@@ -13,7 +13,7 @@ function App() {
       <main>
         <div className="relative bg-gradient-to-br min-h-[90vh] from-blue-50 via-white to-green-50 py-15 transition-colors duration-200">
           <div className="flex flex-col items-center">
-          <ActiveComponent />
+          <ActiveComponent setActiveTab={setActiveTab} />
           </div>
         </div>
       </main>

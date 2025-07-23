@@ -5,9 +5,11 @@ import {
   BUTTON_TYPES,
   ICON_PLACEMENT,
 } from "../../../constants/button";
+import type { ActiveTabProps } from "../../../types";
+import { navigationTabs } from "../../../constants/navigation";
 import Card from "../../Card";
 
-const Home = () => {
+const Home = ({ setActiveTab }: ActiveTabProps) => {
   return (
     <div className="flex flex-col max-w-[90vw] items-center">
       <div className="bg-blue-100 rounded-2xl p-4 m-5">
@@ -30,7 +32,7 @@ const Home = () => {
           icon={ArrowRight}
           variant={BUTTON_TYPES.PRIMARY}
           size={BUTTON_SIZE.MEDIUM}
-          onClick={() => {}}
+          onClick={() => setActiveTab(navigationTabs[1])}
         />
         <Button
           title="Try AI Diet Assistant"
@@ -57,8 +59,8 @@ const Home = () => {
           subHeading="Monitor your symptoms, lifestyle changes, and health improvements over time"
           icon={
             <div className="p-2 bg-green-100 border-green-50 border-1 rounded-lg mb-4">
-            <TrendingUp className="w-5 h-5 text-green-600" />
-          </div>
+              <TrendingUp className="w-5 h-5 text-green-600" />
+            </div>
           }
         />
 
@@ -67,7 +69,7 @@ const Home = () => {
           subHeading="Receive AI-generated diet plans and personalized recommendations for optimal health"
           icon={
             <div className="p-2 bg-orange-100 border-orange-50 border-1 rounded-lg mb-4">
-            <Sparkles className="w-5 h-5 text-orange-600" />
+              <Sparkles className="w-5 h-5 text-orange-600" />
             </div>
           }
         />

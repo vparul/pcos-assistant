@@ -1,5 +1,6 @@
 export interface CardProps {
-    heading: string;
-    subHeading?: string;
-    icon: React.ReactElement;
+   heading: string;
+   subHeading?: string;
+   icon: React.ReactElement;
+   className?: string;
 }
