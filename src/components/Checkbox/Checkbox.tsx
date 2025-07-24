@@ -5,7 +5,11 @@ export const Checkbox = ({
   value,
   onChange,
   selectedValues = [],
+  disabled,
+  className = "",
 }: CheckboxProps) => {
+  const checkboxId = `checkbox-${value}`;
+
   const handleOnChange = (value: string) => {
     let result = [];
     if (selectedValues?.includes(value)) {
@@ -18,7 +22,7 @@ export const Checkbox = ({
 
   return (
     <div
-      className="p-4 gap-2 flex items-center border-1 cursor-pointer border-gray-100 rounded-lg mb-2"
+      className={`p-4 gap-2 flex items-center border-1 cursor-pointer border-gray-100 rounded-lg mb-2 ${className}`}
       onClick={() => handleOnChange(value)}
     >
       <input
@@ -27,10 +31,13 @@ export const Checkbox = ({
         checked={selectedValues?.includes(value)}
         name="label"
         type="checkbox"
+        readOnly
+        disabled={disabled}
+        id={checkboxId}
       />
       <label
         className="cursor-pointer font-medium text-gray-600 text-sm"
-        htmlFor="label"
+        htmlFor={checkboxId}
       >
         {label}
       </label>

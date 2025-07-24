@@ -18,6 +18,7 @@ const Assessment = () => {
     radio: RadioButton,
     checkbox: Checkbox,
   };
+  // if remove the answers, the next button doesnt disabled
 
   const questionList = [
     {

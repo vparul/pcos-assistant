@@ -3,4 +3,6 @@ export interface RadioButtonProps {
     onChange: Function;
     value: string;
     checked: boolean;
+    disabled?: boolean;
+    className?: string;
 }
