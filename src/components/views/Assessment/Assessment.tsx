@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import ProgressBar from "../../ProgressBar";
 import RadioButton from "../../RadioButton";
+import Button from "../../Button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  BUTTON_SIZE,
+  BUTTON_TYPES,
+  ICON_PLACEMENT,
+} from "../../../constants/button";
 
 const Assessment = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -222,8 +229,20 @@ const Assessment = () => {
     return Math.round(percentage);
   };
 
+  const onPreviousButtonClick = () => {
+    if (currentStep > 1) {
+      setCurrentStep(step => step - 1);
+    }
+  };
+
+  const onNextButtonClick = () => {
+    if (currentStep !== questionList?.length) {
+      setCurrentStep(step => step + 1);
+    }
+  };
+
   return (
-    <div className="max-w-full flex items-center flex-col bg-white shadow-md border-1 border-gray-100 rounded-xl">
+    <div className="w-3xl max-w-full flex items-center flex-col bg-white shadow-md border-1 border-gray-100 rounded-xl">
       <div className="bg-gray-50 py-5 px-6 w-full">
         <div className="text-gray-600 text-xs font-medium flex justify-between pb-2">
           Question {currentStep} of {questionList?.length}
@@ -240,6 +259,24 @@ const Assessment = () => {
             {questionList[currentStep - 1]?.question}
           </h4>
           {getRenderers(questionList[currentStep - 1] as any)}
+        </div>
+        <div className="flex justify-between items-center pt-4 pb-2">
+          <Button
+            variant={BUTTON_TYPES.OUTLINE}
+            size={BUTTON_SIZE.SMALL}
+            disabled={currentStep === 1}
+            icon={ChevronLeft}
+            iconPlacement={ICON_PLACEMENT.LEFT}
+            title="Previous"
+            onClick={onPreviousButtonClick}
+          />
+          <Button
+            variant={BUTTON_TYPES.PRIMARY}
+            size={BUTTON_SIZE.SMALL}
+            icon={ChevronRight}
+            title="Next"
+            onClick={onNextButtonClick}
+          />
         </div>
       </div>
     </div>
