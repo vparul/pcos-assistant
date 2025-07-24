@@ -22,7 +22,7 @@ const Button = ({
   const getStyles = () => {
     switch (variant) {
       case PRIMARY:
-        return "bg-blue-600 text-white border-blue-100 hover:bg-blue-700 transform hover:scale-105 hover:shadow-xl";
+        return "bg-blue-600 text-white border-blue-100 hover:bg-blue-700 transform hover:scale-105 hover:shadow-xl disabled:text-white";
       case SECONDARY:
         return "bg-white text-blue-600 border-blue-600 hover:bg-blue-50";
       case OUTLINE:
@@ -52,8 +52,9 @@ const Button = ({
       className={`flex items-center cursor-pointer shadow-lg
           text-lg transition-all duration-200 rounded-xl disabled:opacity-[0.5] disabled:text-gray-500 
           disabled:cursor-not-allowed disabled:transition-none disabled:scale-100 disabled:shadow-xs
-          border border-solid ${getStyles()} ${getSizeStyle()} ${iconPlacement === ICON_PLACEMENT.LEFT ? "flex-row-reverse" : "flex-row"
-        } ${className}`}
+          border border-solid ${getStyles()} ${getSizeStyle()} ${
+        iconPlacement === ICON_PLACEMENT.LEFT ? "flex-row-reverse" : "flex-row"
+      } ${className}`}
     >
       <span className="px-2">{title}</span>
       {Icon && <Icon size={size === SMALL ? 15 : 20} />}
