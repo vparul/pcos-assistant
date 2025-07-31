@@ -9,8 +9,12 @@ import {
   ICON_PLACEMENT,
 } from "../../../constants/button";
 import Checkbox from "../../Checkbox";
+import RiskLevel from "./RiskLevel";
+import { RISK_LEVEL } from "../../../constants/assessment";
+import type { ActiveTabProps } from "../../../types";
 
-const Assessment = () => {
+const Assessment = ({ setActiveTab }: ActiveTabProps) => {
+  const { LOW, MODERATE, HIGH } = RISK_LEVEL;
   const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState<any>({});
 
@@ -18,7 +22,6 @@ const Assessment = () => {
     radio: RadioButton,
     checkbox: Checkbox,
   };
-  // if remove the answers, the next button doesnt disabled
 
   const questionList = [
     {
@@ -188,50 +191,84 @@ const Assessment = () => {
 
   const onNextButtonClick = () => {
     if (currentStep !== questionList?.length) {
+      const currentQuestion = questionList[currentStep - 1];
+      if (currentQuestion.type === "radio") {
+        const currentSelectedOption = currentQuestion.options?.find(
+          (option) => option.value === answers[currentQuestion?.id]
+        );
+        setAnswers((prevValue: any) => ({
+          ...prevValue,
+          score: (prevValue.score || 0) + currentSelectedOption?.score,
+        }));
+      } else if (currentQuestion.type === "checkbox") {
+        let score = 0;
+        currentQuestion.options?.forEach((option) => {
+          if (answers[currentQuestion.id].includes(option.value)) {
+            score += option.score;
+          }
+        });
+        setAnswers((prevValue: any) => ({
+          ...prevValue,
+          score: (prevValue.score || 0) + score,
+        }));
+      }
+
       setCurrentStep((step) => step + 1);
     }
   };
 
-  console.log(answers);
+  const getRiskLevel = (): string => {
+    const score = answers.score;
+    if (score <= 3) return LOW;
+    if (score <= 7) return MODERATE;
+    return HIGH;
+  };
+
   return (
     <div className="w-3xl max-w-full flex items-center flex-col bg-white shadow-md border-1 border-gray-100 rounded-xl">
-      <div className="bg-gray-50 py-5 px-6 w-full">
-        <div className="text-gray-600 text-xs font-medium flex justify-between pb-2">
-          Question {currentStep} of {questionList?.length}
-          <span>{getProgressPercentage()}% Complete</span>
-        </div>
-        <ProgressBar progress={getProgressPercentage()} />
-      </div>
-      <div className="px-6 py-4 w-full">
-        <div>
-          <h6 className="text-blue-600 text-xs font-medium">
-            {questionList[currentStep - 1]?.title}
-          </h6>
-          <h4 className="text-black-500 font-bold text-xl mt-2 mb-4">
-            {questionList[currentStep - 1]?.question}
-          </h4>
-          {getRenderers(questionList[currentStep - 1] as any)}
-        </div>
-        <div className="flex justify-between items-center pt-4 pb-2">
-          <Button
-            variant={BUTTON_TYPES.OUTLINE}
-            size={BUTTON_SIZE.SMALL}
-            disabled={currentStep === 1}
-            icon={ChevronLeft}
-            iconPlacement={ICON_PLACEMENT.LEFT}
-            title="Previous"
-            onClick={onPreviousButtonClick}
-          />
-          <Button
-            disabled={!answers?.[questionList[currentStep - 1]?.id]}
-            variant={BUTTON_TYPES.PRIMARY}
-            size={BUTTON_SIZE.SMALL}
-            icon={ChevronRight}
-            title="Next"
-            onClick={onNextButtonClick}
-          />
-        </div>
-      </div>
+      {questionList?.length === currentStep ? (
+        <RiskLevel riskLevel={getRiskLevel()} setActiveTab={setActiveTab} />
+      ) : (
+        <>
+          <div className="bg-gray-50 py-5 px-6 w-full">
+            <div className="text-gray-600 text-xs font-medium flex justify-between pb-2">
+              Question {currentStep} of {questionList?.length}
+              <span>{getProgressPercentage()}% Complete</span>
+            </div>
+            <ProgressBar progress={getProgressPercentage()} />
+          </div>
+          <div className="px-6 py-4 w-full">
+            <div>
+              <h6 className="text-blue-600 text-xs font-medium">
+                {questionList[currentStep - 1]?.title}
+              </h6>
+              <h4 className="text-black-500 font-bold text-xl mt-2 mb-4">
+                {questionList[currentStep - 1]?.question}
+              </h4>
+              {getRenderers(questionList[currentStep - 1] as any)}
+            </div>
+            <div className="flex justify-between items-center pt-4 pb-2">
+              <Button
+                variant={BUTTON_TYPES.OUTLINE}
+                size={BUTTON_SIZE.SMALL}
+                disabled={currentStep === 1}
+                icon={ChevronLeft}
+                iconPlacement={ICON_PLACEMENT.LEFT}
+                title="Previous"
+                onClick={onPreviousButtonClick}
+              />
+              <Button
+                disabled={!answers?.[questionList[currentStep - 1]?.id]}
+                variant={BUTTON_TYPES.PRIMARY}
+                size={BUTTON_SIZE.SMALL}
+                icon={ChevronRight}
+                title="Next"
+                onClick={onNextButtonClick}
+              />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
