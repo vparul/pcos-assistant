@@ -1,9 +1,5 @@
-import React from 'react'
-
 const Learn = () => {
-  return (
-    <div>Learn</div>
-  )
-}
+  return <div>Learn</div>;
+};
 
 export default Learn;
