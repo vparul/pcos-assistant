@@ -5,11 +5,11 @@ import {
   BUTTON_TYPES,
   ICON_PLACEMENT,
 } from "../../../constants/button";
-import type { ActiveTabProps } from "../../../types";
+import type { ActiveITabProps } from "../../../types";
 import { navigationTabs } from "../../../constants/navigation";
 import Card from "../../Card";
 
-const Home = ({ setActiveTab }: ActiveTabProps) => {
+const Home = ({ setActiveTab }: ActiveITabProps) => {
   return (
     <div className="flex flex-col max-w-[90vw] items-center">
       <div className="bg-blue-100 rounded-2xl p-4 m-5">

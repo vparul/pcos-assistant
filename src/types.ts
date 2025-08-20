@@ -1,3 +1,3 @@
-export interface ActiveTabProps {
+export interface ActiveITabProps {
     setActiveTab?: any
 }

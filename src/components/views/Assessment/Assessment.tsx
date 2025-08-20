@@ -11,9 +11,9 @@ import {
 import Checkbox from "../../Checkbox";
 import RiskLevel from "./RiskLevel";
 import { RISK_LEVEL } from "../../../constants/assessment";
-import type { ActiveTabProps } from "../../../types";
+import type { ActiveITabProps } from "../../../types";
 
-const Assessment = ({ setActiveTab }: ActiveTabProps) => {
+const Assessment = ({ setActiveTab }: ActiveITabProps) => {
   const { LOW, MODERATE, HIGH } = RISK_LEVEL;
   const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState<any>({});

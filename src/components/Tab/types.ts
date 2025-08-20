@@ -1,14 +1,17 @@
-export interface TabList {
+import type { JSX } from "react";
+
+export interface ITabList {
     title: string;
     disabled?: boolean;
     icon?: React.ElementType;
-    component?: React.ComponentType;
+    component?: JSX.Element;
 
 }
 
-export interface TabProps {
-    list: TabList[];
+export interface ITabProps {
+    list: ITabList[];
     onClick: Function;
     selectedTab: string;
     className?: string;
 }
+

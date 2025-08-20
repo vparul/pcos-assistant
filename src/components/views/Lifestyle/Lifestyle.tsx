@@ -7,34 +7,40 @@ import {
   Moon,
   TrendingUp,
 } from "lucide-react";
-import type { TabList } from "../../Tab/types";
+import type { ITabList } from "../../Tab/types";
 import Tab from "../../Tab";
 import Symptoms from "./Symptoms";
 import Exercise from "./Exercise";
 import Nutrition from "./Nutrition";
 import Sleep from "./Sleep";
+import type { ILifestyleAnswer } from "./types";
 
 const Lifestyle = () => {
-  const tabs: TabList[] = [
+  const [answers, setAnswers] = useState<ILifestyleAnswer>({
+    severity: 0,
+    symptoms: [],
+    comments: "",
+  });
+  const tabs: ITabList[] = [
     {
       title: "Symptoms",
       icon: TrendingUp,
-      component: Symptoms,
+      component: <Symptoms answers={answers} setAnswers={setAnswers} />,
     },
     {
       title: "Exercise",
       icon: Activity,
-      component: Exercise,
+      component: <Exercise />,
     },
     {
       title: "Nutrition",
       icon: Utensils,
-      component: Nutrition,
+      component: <Nutrition />,
     },
     {
       title: "Sleep",
       icon: Moon,
-      component: Sleep,
+      component: <Sleep />,
     },
   ];
 
@@ -45,7 +51,7 @@ const Lifestyle = () => {
   };
 
   return (
-    <div>
+    <div className="w-[80%]">
       <h2 className="text-black font-bold text-3xl pb-2">Lifestyle Tracker</h2>
       <p className="text-gray-700">
         Monitor your daily symptoms, exercise, nutrition, and sleep patterns to

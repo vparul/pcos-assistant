@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
-import type { TabProps } from "./types";
+import type { ITabProps } from "./types";
 
-export const Tab = ({ list, onClick, selectedTab, className }: TabProps) => {
+export const Tab = ({ list, onClick, selectedTab, className }: ITabProps) => {
   const selectedTabItem = useMemo(() => {
     return list.find((item) => item.title === selectedTab);
   }, [list, selectedTab]);
@@ -30,7 +30,11 @@ export const Tab = ({ list, onClick, selectedTab, className }: TabProps) => {
           );
         })}
       </div>
-      {SelectedComponent && <SelectedComponent />}
+      {SelectedComponent && (
+        <div className="my-4 min-h-[100px] bg-white border shadow-md py-5 px-5 border-1 border-gray-100 rounded-xl">
+          {SelectedComponent}
+        </div>
+      )}
     </div>
   );
 };
