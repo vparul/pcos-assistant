@@ -1,5 +1,6 @@
 import { BUTTON_SIZE, BUTTON_TYPES } from "../../../constants/button";
 import Button from "../../Button";
+import Heading from "./Heading";
 import type { ILifestyleProps } from "./types";
 
 const Symptoms = ({ answers, setAnswers }: ILifestyleProps) => {
@@ -23,9 +24,7 @@ const Symptoms = ({ answers, setAnswers }: ILifestyleProps) => {
 
   return (
     <div>
-      <h4 className="text-black-500 font-semibold text-lg mb-3">
-        Track Today's Symptoms
-      </h4>
+      <Heading heading="Track Today's Symptoms" />
       <h5 className="text-gray-700 text-sm mb-3 font-medium">
         Select symptoms you're experiencing:
       </h5>

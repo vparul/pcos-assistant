@@ -16,7 +16,7 @@ const Button = ({
   className,
   children,
 }: ButtonProps) => {
-  const { SECONDARY, PRIMARY, OUTLINE } = BUTTON_TYPES;
+  const { SECONDARY, PRIMARY, OUTLINE, SUCCESS, WARNING } = BUTTON_TYPES;
   const { SMALL, LARGE } = BUTTON_SIZE;
 
   const getStyles = () => {
@@ -27,6 +27,10 @@ const Button = ({
         return "bg-white text-blue-600 border-blue-600 hover:bg-blue-50";
       case OUTLINE:
         return "bg-white text-black border-1 border-gray-200 hover:bg-gray-100 transform hover:scale-105 hover:shadow-xl";
+      case SUCCESS:
+        return "bg-green-600 text-white border-1 border-green-200 hover:bg-green-500 transform hover:scale-105 hover:shadow-xl";
+      case WARNING:
+        return "bg-orange-600 text-white border-1 border-orange-200 hover:bg-orange-500 transform hover:scale-105 hover:shadow-xl";
       default:
         return "bg-blue-600 text-white shadow-md";
     }
